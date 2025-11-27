@@ -1,0 +1,10 @@
+{
+  "usd": {
+    "offset": -35,
+    "override": null
+  },
+  "eur": {
+    "offset": -41,
+    "override": null
+  }
+}

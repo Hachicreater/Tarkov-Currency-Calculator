@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>TARKOV 通貨計算ツール</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- フォント：タイトル用 Yusei Magic / 本文用 Roboto Condensed -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&family=Yusei+Magic&display=swap" rel="stylesheet">
+
+  <!-- 外部CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="wrapper">
+    <h1>TARKOV 通貨計算ツール</h1>
+
+    <div class="layout">
+      <!-- 左カラム：通貨計算 -->
+      <div class="main-column">
+        <div class="card">
+          <div id="status" class="status">
+            API から最新レートを取得しています…
+          </div>
+
+          <div class="field">
+            <label for="rubInput">RUB（ルーブル）</label>
+            <input id="rubInput" type="number" inputmode="decimal"
+                   placeholder="金額を入力" disabled>
+          </div>
+
+          <div class="field">
+            <label for="usdInput">USD（ドル）</label>
+            <input id="usdInput" type="number" inputmode="decimal"
+                   placeholder="金額を入力" disabled>
+          </div>
+
+          <div class="field" style="margin-bottom:4px;">
+            <label for="eurInput">EUR（ユーロ）</label>
+            <input id="eurInput" type="number" inputmode="decimal"
+                   placeholder="金額を入力" disabled>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="rates-title">換算レート</div>
+          <div id="ratesText" class="rates-text">
+            Loading...
+          </div>
+
+          <div class="field" style="margin-top:10px;">
+            <label for="usdRateInput">手動設定：1 USD = （RUB）</label>
+            <input id="usdRateInput" type="number" step="0.01" disabled>
+          </div>
+          <div class="field" style="margin-top:-4px; margin-bottom:8px;">
+            <label for="eurRateInput">手動設定：1 EUR = （RUB）</label>
+            <input id="eurRateInput" type="number" step="0.01" disabled>
+          </div>
+
+          <div id="lastUpdated" class="rates-text" style="margin-top:2px;font-size:12px;"></div>
+        </div>
+      </div>
+
+      <!-- 右カラム：アイテム買取価格 -->
+      <div class="side-column">
+        <div class="card" id="itemCard">
+          <div class="rates-title">アイテム買取価格</div>
+
+          <div class="field">
+            <label for="itemNameInput">アイテム名</label>
+            <input id="itemNameInput" type="text"
+                   placeholder="例：Salewa first aid kit, Slick, SSD など">
+            <div id="itemSuggestions" class="suggestions"></div>
+          </div>
+
+          <div class="field" style="margin-top:-4px;">
+            <button id="itemSearchBtn" class="button">
+              検索する
+            </button>
+          </div>
+
+          <!-- 英語表記での検索注記 -->
+          <div class="rates-text" style="font-size:12px;margin-top:-6px;margin-bottom:8px;">
+            ※ tarkov.dev API の仕様により、<span style="color:#bbf7d0;">アイテム名は英語表記での検索をお願いします</span>。<br>
+            （例：サレワ → <code>Salewa first aid kit</code>）
+          </div>
+
+          <div id="itemResult" class="rates-text" style="margin-top:4px;">
+            アイテム名を英語で入力して「検索する」を押すと、<br>
+            トレーダーの買取価格が表示されます。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-inner">
+        Data from <a href="https://tarkov.dev" target="_blank" rel="noopener">tarkov.dev</a> ・
+        Site by <a href="https://x.com/hachixgtr" target="_blank" rel="noopener">@hachixgtr</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ローディングオーバーレイ -->
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="spinner"></div>
+    <div class="loading-title">LOADING...</div>
+    <div class="loading-sub">tarkov.dev API から最新データを取得しています</div>
+  </div>
+
+  <!-- 外部JS -->
+  <script src="js/app.js"></script>
+</body>
+</html>
